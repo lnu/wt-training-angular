@@ -1,20 +1,20 @@
-import { UserStore } from './user-store';
-import { User } from './user';
+import {UserStore} from './user-store';
+import {User} from './user';
 
 describe('UserStore', () => {
 
   let userStore = new UserStore();
 
-  let user1 = new User('Foo', 'BAR');
-  let user2 = new User('John', 'DOE');
-  let user3 = new User('Foo', 'BAR');
+  let user1;
+  let user2;
+  let user3;
 
   beforeEach(() => {
     userStore = new UserStore();
 
-    user1 = new User('Foo', 'BAR');
-    user2 = new User('John', 'DOE');
-    user3 = new User('Foo', 'BAR');
+    user1 = new User(0, 'Foo', 'BAR');
+    user2 = new User(1, 'John', 'DOE');
+    user3 = new User(2, 'Foo', 'BAR');
   });
 
   it('should add users', () => {

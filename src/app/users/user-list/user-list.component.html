@@ -1,0 +1,11 @@
+<input type="text" [(ngModel)]="firstName" />
+<input type="text" [(ngModel)]="lastName" />
+<button (click)="addUser()">Add</button>
+<ul>
+  <li *ngFor="let user of userList$ | async" style="list-style: none">
+    <wt-user-preview [user]="user" (userRemove)="onRemoveUser($event)"></wt-user-preview>
+  </li>
+</ul>
+
+<!--<wt-user-form (userSubmit)="..."></wt-user-form>
+<wt-user-preview></wt-user-preview>-->
