@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-firstlazy',
+  selector: 'wt-firstlazy',
   templateUrl: './firstlazy.component.html',
   styleUrls: ['./firstlazy.component.css']
 })
