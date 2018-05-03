@@ -1,48 +1,23 @@
-class User {
-  public FirstName: string;
-  public LastName: string;
-  constructor(firstName: string, lastName: string) {
-    this.FirstName = firstName;
-    this.LastName = lastName;
-  }
-}
-
-class UserStore {
-  private _users: User[] = new Array<User>();
-
-  /**
-   * addUser
-   */
-  public addUser(user: User) {
-    //this._users.push(user);
-    this._users = [...this._users, user];
-  }
-
-  public removeUser(user: User) {
-    const index = this._users.indexOf(user);
-    //this._users.splice(index, 1);
-    this._users = this.immutableSplice(this._users, index, 1);
-  }
-
-  private immutableSplice(arr, start, deleteCount) {
-    return [...arr.slice(0, start), ...arr.slice(start + deleteCount)];
-  }
-
-  public getUserList(): User[] {
-    return this._users;
-  }
-
-}
+import { UserStore } from './user-store';
+import { User } from './user';
 
 describe('UserStore', () => {
 
+  let userStore = new UserStore();
+
+  let user1 = new User('Foo', 'BAR');
+  let user2 = new User('John', 'DOE');
+  let user3 = new User('Foo', 'BAR');
+
+  beforeEach(() => {
+    userStore = new UserStore();
+
+    user1 = new User('Foo', 'BAR');
+    user2 = new User('John', 'DOE');
+    user3 = new User('Foo', 'BAR');
+  });
+
   it('should add users', () => {
-
-    const userStore = new UserStore();
-
-    const user1 = new User('Foo', 'BAR');
-    const user2 = new User('John', 'DOE');
-    const user3 = new User('Foo', 'BAR');
 
     const userListEmpty = userStore.getUserList();
 
@@ -63,12 +38,6 @@ describe('UserStore', () => {
   });
 
   it('should remove users', () => {
-
-    const userStore = new UserStore();
-
-    const user1 = new User('Foo', 'BAR');
-    const user2 = new User('John', 'DOE');
-    const user3 = new User('Foo', 'BAR');
 
     userStore.addUser(user1);
     userStore.addUser(user2);
