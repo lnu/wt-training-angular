@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'wt-firstlazy',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstlazyComponent implements OnInit {
 
-  constructor() { }
+  userName = 'foo';
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  changePicture() {
+    this.userName = this.userName + 1;
+  }
+
+  getPictureUrl() {
+    return `https://robohash.org/${this.userName}`;
+  }
 }

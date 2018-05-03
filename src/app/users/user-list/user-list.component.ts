@@ -3,6 +3,7 @@ import {User} from '../user';
 import {UserService} from '../user.service';
 import {Observable} from 'rxjs/Observable';
 import {shareReplay} from 'rxjs/operators';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'wt-user-list',
@@ -14,8 +15,8 @@ export class UserListComponent implements OnInit {
   firstName: string;
   lastName: string;
 
-  data: any;
   userList$: Observable<any>;
+  form: FormGroup;
 
   constructor(private _userService: UserService) {
     this.refreshUsers();
@@ -29,13 +30,22 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+    });
   }
 
   addUser() {
-    this._userService.addUser(new User(0, this.firstName, this.lastName)).subscribe(data => this.refreshUsers());
+    this._userService.addUser(new User(0, this.form.controls.firstName.value, this.form.controls.lastName.value))
+      .subscribe(data => this.refreshUsers());
   }
 
   onRemoveUser(u: User) {
     this._userService.removeUser(u).subscribe(data => this.refreshUsers());
+  }
+
+  onUpdateUser(u: User) {
+    this._userService.updateUser(u).subscribe(data => this.refreshUsers());
   }
 }
