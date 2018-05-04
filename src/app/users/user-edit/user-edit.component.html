@@ -1,5 +1,9 @@
 <form [formGroup]="form" def>
-  <input type="text" formControlName="firstName" required id="firstName" name="lastName" placeholder="first name"/>
-  <input type="text" formControlName="lastName" required id="lastName" name="lastName" placeholder="last name"/>
-  <button class="fa fa-plus" type="submit" (click)="addUser()" [disabled]="!form.valid">Add</button>
+  <input *ngIf="!isEditing || (isEditing && editMode===true)" type="text" formControlName="firstName" required id="firstName" name="lastName" placeholder="first name"/>
+  <input *ngIf="!isEditing || (isEditing && editMode===true)" type="text" formControlName="lastName" required id="lastName" name="lastName" placeholder="last name"/>
+  <button *ngIf="!isEditing" class="fa fa-plus" type="submit" (click)="addUser()" [disabled]="!form.valid">Add</button>
+  <i *ngIf="editMode===false && isEditing" class="fa fa-2x fa-edit" (click)="toggleEdit()"></i>
+  <i *ngIf="editMode===true && isEditing" class="fa fa-2x fa-save" (click)="updateUser()"></i>
+  <i *ngIf="editMode===true && isEditing" class="fa fa-2x fa-ban" (click)="toggleEdit()"></i>
+  <i *ngIf="editMode===true && isEditing" class="fa fa-2x fa-trash" (click)="removeUser()"></i>
 </form>

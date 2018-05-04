@@ -1,8 +1,8 @@
-<wt-user-edit (userSubmit)="onUserSubmit($event)"></wt-user-edit>
+<wt-user-edit (userUpdated)="refreshUsers($event)"></wt-user-edit>
 <ul>
   <li *ngFor="let user of userList$ | async; trackBy:trackByUserId" style="list-style: none">
-    <wt-user-preview [user]="user" (userRemove)="onRemoveUser($event)"
-                     (userUpdate)="onUpdateUser($event)"></wt-user-preview>
+    <wt-user-preview [user]="user" ></wt-user-preview>
+    <wt-user-edit (userUpdated)="refreshUsers($event)" [user]="user"></wt-user-edit>
   </li>
 </ul>
 

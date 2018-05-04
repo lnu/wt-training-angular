@@ -1,9 +1,3 @@
-<span *ngIf="editMode===false">{{ user | username }}</span>
-<div *ngIf="editMode===true">
-  <input type="text" [(ngModel)]="firstName"/>
-  <input type="text" [(ngModel)]="lastName"/>
-</div><br/>
-<img [src]="getUserAvatar()" alt="no image" (click)="removeUser()"/>
-<i *ngIf="editMode===false" class="fa fa-2x fa-edit" (click)="toggleEdit()"></i>
-<i *ngIf="editMode===true" class="fa fa-2x fa-save" (click)="updateUser()"></i>
-<i *ngIf="editMode===true" class="fa fa-2x fa-ban" (click)="toggleEdit()"></i>
+<span>{{ user | username }}</span>
+<br/>
+<img [src]="getUserAvatar()" alt="no image"/>
