@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  usersApiUrl: 'https://wt-users.getsandbox.com/users',
+  roboHashUrl: 'https://robohash.org/'
 };

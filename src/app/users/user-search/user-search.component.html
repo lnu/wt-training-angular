@@ -1,0 +1,4 @@
+<form [formGroup]="form">
+  <input formControlName="searchText" type="text" placeholder="type to search"/>
+  <wt-user-preview *ngFor="let user of userList$ | async" [user]="user"></wt-user-preview>
+</form>

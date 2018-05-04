@@ -1,8 +1,13 @@
-<wt-user-edit (userUpdated)="refreshUsers($event)"></wt-user-edit>
+<wt-user-edit (userSubmit)="addUser($event)" buttonLabel="Add"></wt-user-edit>
 <ul>
   <li *ngFor="let user of userList$ | async; trackBy:trackByUserId" style="list-style: none">
-    <wt-user-preview [user]="user" ></wt-user-preview>
-    <wt-user-edit (userUpdated)="refreshUsers($event)" [user]="user"></wt-user-edit>
+    <wt-user-preview [user]="user">
+      <wt-user-edit (userSubmit)="updateUser($event)" [user]="user" *ngIf="editedUser === user" buttonLabel="Update"></wt-user-edit>
+      <i *ngIf="editMode===false" class="fa fa-2x fa-edit" (click)="toggleEdit(user)"></i>
+      <i *ngIf="editMode===true && editedUser === user" class="fa fa-2x fa-ban" (click)="toggleEdit()"></i>
+      <i *ngIf="editMode===true && editedUser === user" class="fa fa-2x fa-trash" (click)="removeUser()"></i>
+    </wt-user-preview>
+
   </li>
 </ul>
 

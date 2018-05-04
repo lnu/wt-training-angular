@@ -8,9 +8,10 @@ import {UserService} from './user.service';
 import {UsernamePipe} from './username.pipe';
 import {UserEditComponent} from './user-edit/user-edit.component';
 import {InputMaskModule, InputTextModule} from 'primeng/primeng';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserPreviewComponent, UsernamePipe, UserEditComponent],
+  declarations: [UserListComponent, UserPreviewComponent, UsernamePipe, UserEditComponent, UserSearchComponent],
   exports: [UserListComponent, UserPreviewComponent],
   imports: [
     CommonModule,

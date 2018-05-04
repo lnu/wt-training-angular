@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {User} from '../user';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
@@ -8,17 +8,11 @@ import {UserService} from '../user.service';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnChanges {
 
   @Input() user: User;
-  @Output() userUpdated = new EventEmitter();
-
-  form: FormGroup;
-  editMode = false;
-  isEditing = true;
-
-  constructor(private _userService: UserService) {
-  }
+  @Input() buttonLabel: string;
+  @Output() userSubmit = new EventEmitter<User>();
 
   customValidator: ValidatorFn = (control) => {
     if (control.value === 'Nicko') {
@@ -32,39 +26,32 @@ export class UserEditComponent implements OnInit {
     return null;
   };
 
-  ngOnInit() {
-    if (!this.user) {
-      this.isEditing = false;
-      this.user = new User(0, '', '');
-    }
-    this.form = new FormGroup({
-      firstName: new FormControl(this.user.firstName, [Validators.required, this.customValidator]),
-      lastName: new FormControl(this.user.lastName, [Validators.required]),
-      masked: new FormControl('')
-    });
+  form: FormGroup = new FormGroup({
+    firstName: new FormControl(null, [Validators.required, this.customValidator]),
+    lastName: new FormControl(null, [Validators.required]),
+    masked: new FormControl('')
+  });
+  isEditing = true;
 
+  constructor(private _userService: UserService) {
+  }
+
+  ngOnInit() {
     this.form.valueChanges.subscribe(data => console.log('form changed'));
   }
 
-  toggleEdit() {
-    this.editMode = !this.editMode;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.user != null) {
+      this.form.reset(this.user);
+    }
   }
 
-  addUser() {
-    this._userService.addUser(new User(this.user.id, this.form.controls.firstName.value, this.form.controls.lastName.value))
-      .subscribe(data => this.userUpdated.emit(data));
-  }
-
-  updateUser() {
-    this._userService.updateUser(new User(this.user.id, this.form.controls.firstName.value, this.form.controls.lastName.value))
-      .subscribe(data => {
-        this.userUpdated.emit(data);
-        this.toggleEdit();
-      });
-  }
-
-  removeUser() {
-    this._userService.removeUser(this.user)
-      .subscribe(data => this.userUpdated.emit(data));
+  submitUser() {
+    if (this.user) {
+      this.form.value.id = this.user.id;
+    }
+    const user = new User(this.form.value);
+    this.userSubmit.emit(user);
+    this.form.reset();
   }
 }

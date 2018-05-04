@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'wt-firstlazy',
@@ -20,6 +21,6 @@ export class FirstlazyComponent implements OnInit {
   }
 
   getPictureUrl() {
-    return `https://robohash.org/${this.userName}`;
+    return `${environment.roboHashUrl}/${this.userName}`;
   }
 }

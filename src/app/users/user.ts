@@ -1,9 +1,9 @@
-export class User {
+/*export class User {
   constructor(public id: number, public firstName: string, public lastName: string) {
   }
-}
+}*/
 
-/*
+
 export class UserSchema {
 
   firstName?: string;
@@ -20,4 +20,4 @@ export class UserSchema {
 
 export class User extends UserSchema {
 }
-*/
+
