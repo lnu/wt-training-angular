@@ -44,7 +44,7 @@ export class UserSearchComponent implements OnInit {
 
   }
 
-  private _search(value: { searchText: string }): Observable<User> {
+  private _search(value: { searchText: string }): Observable<User[]> {
     // don't bind type directly
     return this._httpClient
       .get<any[]>(`https://wt-users.getsandbox.com/users?firstName=${value.searchText}`)

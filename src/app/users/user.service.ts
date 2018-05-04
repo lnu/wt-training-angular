@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -37,5 +38,12 @@ export class UserService {
   updateUser(u: User): Observable<any> {
     //this.userStore.addUser(u);
     return this.http.patch(`${environment.usersApiUrl}/${u.id}`, u);
+  }
+
+  getUser(id: string): Observable<any> {
+    return this.http.get(`https://wt-users.getsandbox.com/users/${id}`)
+      .pipe(
+        map(userData => new User(userData))
+      );
   }
 }

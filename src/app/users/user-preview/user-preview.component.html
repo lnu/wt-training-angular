@@ -1,5 +1,5 @@
 <div style="text-align: center">
   <img [src]="getUserAvatar()" alt="no image"/><br/>
-  <span>{{ user | username }}</span>
+  <a [routerLink]="['/Users/detail', user.id]">{{ user | username }}</a>
   <ng-content></ng-content>
 </div>

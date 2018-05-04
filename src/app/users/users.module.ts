@@ -8,18 +8,21 @@ import {UserService} from './user.service';
 import {UsernamePipe} from './username.pipe';
 import {UserEditComponent} from './user-edit/user-edit.component';
 import {InputMaskModule, InputTextModule} from 'primeng/primeng';
-import { UserSearchComponent } from './user-search/user-search.component';
+import {UserSearchComponent} from './user-search/user-search.component';
+import {UserDetailComponent} from './user-detail/user-detail.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  declarations: [UserListComponent, UserPreviewComponent, UsernamePipe, UserEditComponent, UserSearchComponent],
-  exports: [UserListComponent, UserPreviewComponent],
+  declarations: [UserListComponent, UserPreviewComponent, UserDetailComponent, UsernamePipe, UserEditComponent, UserSearchComponent],
+  exports: [UserListComponent, UserPreviewComponent, UserDetailComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     InputMaskModule,
-    InputTextModule
+    InputTextModule,
+    RouterModule
   ],
   providers: [
     UserService

@@ -8,7 +8,7 @@ export class UserSchema {
 
   firstName?: string;
   lastName?: string;
-  id?: number;
+  id?: string;
 
   constructor(args: UserSchema = {}) {
     this.firstName = args.firstName;
