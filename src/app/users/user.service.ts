@@ -36,6 +36,6 @@ export class UserService {
 
   updateUser(u: User): Observable<any> {
     //this.userStore.addUser(u);
-    return this.http.put(this._url, u);
+    return this.http.patch(`${this._url}/${u.id}`, u);
   }
 }

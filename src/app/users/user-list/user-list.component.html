@@ -1,13 +1,10 @@
-<form [formGroup]="form" def>
-  <input type="text" formControlName="firstName" required id="firstName" name="lastName" placeholder="first name"/>
-  <input type="text" formControlName="lastName" required id="lastName" name="lastName" placeholder="last name"/>
-  <button class="fa fa-plus" type="submit" (click)="addUser()" [disabled]="!form.valid">Add</button>
-  <ul>
-    <li *ngFor="let user of userList$ | async" style="list-style: none">
-      <wt-user-preview [user]="user" (userRemove)="onRemoveUser($event)"
-                       (userUpdate)="onUpdateUser($event)"></wt-user-preview>
-    </li>
-  </ul>
-</form>
+<wt-user-edit (userSubmit)="onUserSubmit($event)"></wt-user-edit>
+<ul>
+  <li *ngFor="let user of userList$ | async; trackBy:trackByUserId" style="list-style: none">
+    <wt-user-preview [user]="user" (userRemove)="onRemoveUser($event)"
+                     (userUpdate)="onUpdateUser($event)"></wt-user-preview>
+  </li>
+</ul>
+
 <!--<wt-user-form (userSubmit)="..."></wt-user-form>
 <wt-user-preview></wt-user-preview>-->

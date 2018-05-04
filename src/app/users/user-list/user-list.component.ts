@@ -16,7 +16,6 @@ export class UserListComponent implements OnInit {
   lastName: string;
 
   userList$: Observable<any>;
-  form: FormGroup;
 
   constructor(private _userService: UserService) {
     this.refreshUsers();
@@ -30,15 +29,6 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-    });
-  }
-
-  addUser() {
-    this._userService.addUser(new User(0, this.form.controls.firstName.value, this.form.controls.lastName.value))
-      .subscribe(data => this.refreshUsers());
   }
 
   onRemoveUser(u: User) {
@@ -47,5 +37,14 @@ export class UserListComponent implements OnInit {
 
   onUpdateUser(u: User) {
     this._userService.updateUser(u).subscribe(data => this.refreshUsers());
+  }
+
+  trackByUserId(index, user) {
+    return user.id;
+  }
+
+  onUserSubmit(u: User) {
+    this._userService.addUser(u)
+      .subscribe(data => this.refreshUsers());
   }
 }

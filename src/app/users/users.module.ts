@@ -6,9 +6,10 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserPreviewComponent} from './user-preview/user-preview.component';
 import {UserService} from './user.service';
 import {UsernamePipe} from './username.pipe';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserPreviewComponent, UsernamePipe],
+  declarations: [UserListComponent, UserPreviewComponent, UsernamePipe, UserEditComponent],
   exports: [UserListComponent, UserPreviewComponent],
   imports: [
     CommonModule,

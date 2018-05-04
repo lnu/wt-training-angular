@@ -1,0 +1,5 @@
+<form [formGroup]="form" def>
+  <input type="text" formControlName="firstName" required id="firstName" name="lastName" placeholder="first name"/>
+  <input type="text" formControlName="lastName" required id="lastName" name="lastName" placeholder="last name"/>
+  <button class="fa fa-plus" type="submit" (click)="addUser()" [disabled]="!form.valid">Add</button>
+</form>
