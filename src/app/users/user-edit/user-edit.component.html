@@ -1,7 +1,23 @@
-<form [formGroup]="form" def>
-  <input *ngIf="!isEditing || (isEditing && editMode===true)" type="text" formControlName="firstName" required id="firstName" name="lastName" placeholder="first name"/>
-  <input *ngIf="!isEditing || (isEditing && editMode===true)" type="text" formControlName="lastName" required id="lastName" name="lastName" placeholder="last name"/>
+<form [formGroup]="form" style="text-align:center" >
+  <span class="ui-float-label" *ngIf="!isEditing || (isEditing && editMode===true)">
+  <input pInputText type="text" formControlName="firstName"
+         required id="firstName" name="lastName"/>
+   <label for="firstName">First Name</label>
+  </span>
+  <span class="ui-float-label" *ngIf="!isEditing || (isEditing && editMode===true)">
+  <input pInputText type="text" formControlName="lastName" required
+         id="lastName" name="lastName"/>
+  <label for="lastName">Last Name</label>
+  </span>
+  <p-inputMask *ngIf="!isEditing || (isEditing && editMode===true)" mask="99-999999" formControlName="masked"
+               placeholder="99-999999"></p-inputMask>
   <button *ngIf="!isEditing" class="fa fa-plus" type="submit" (click)="addUser()" [disabled]="!form.valid">Add</button>
+  <div *ngIf="(!isEditing || (isEditing && editMode===true)) && form.controls.firstName.errors" class="error">
+    <span>Firstname mandatory</span>
+  </div>
+  <div *ngIf="(!isEditing || (isEditing && editMode===true)) && form.controls.lastName.errors" class="error">
+    <span>Lastname mandatory</span>
+  </div>
   <i *ngIf="editMode===false && isEditing" class="fa fa-2x fa-edit" (click)="toggleEdit()"></i>
   <i *ngIf="editMode===true && isEditing" class="fa fa-2x fa-save" (click)="updateUser()"></i>
   <i *ngIf="editMode===true && isEditing" class="fa fa-2x fa-ban" (click)="toggleEdit()"></i>

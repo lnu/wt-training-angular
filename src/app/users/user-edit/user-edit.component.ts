@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../user';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 
 @Component({
@@ -20,15 +20,30 @@ export class UserEditComponent implements OnInit {
   constructor(private _userService: UserService) {
   }
 
+  customValidator: ValidatorFn = (control) => {
+    if (control.value === 'Nicko') {
+      return {
+        'customValidator': {
+          person: control.value,
+          reason: 'fk drummer'
+        }
+      };
+    }
+    return null;
+  };
+
   ngOnInit() {
     if (!this.user) {
       this.isEditing = false;
       this.user = new User(0, '', '');
     }
     this.form = new FormGroup({
-      firstName: new FormControl(this.user.firstName, Validators.required),
-      lastName: new FormControl(this.user.lastName, Validators.required),
+      firstName: new FormControl(this.user.firstName, [Validators.required, this.customValidator]),
+      lastName: new FormControl(this.user.lastName, [Validators.required]),
+      masked: new FormControl('')
     });
+
+    this.form.valueChanges.subscribe(data => console.log('form changed'));
   }
 
   toggleEdit() {

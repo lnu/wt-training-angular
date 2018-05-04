@@ -6,7 +6,8 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserPreviewComponent} from './user-preview/user-preview.component';
 import {UserService} from './user.service';
 import {UsernamePipe} from './username.pipe';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import {UserEditComponent} from './user-edit/user-edit.component';
+import {InputMaskModule, InputTextModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [UserListComponent, UserPreviewComponent, UsernamePipe, UserEditComponent],
@@ -15,7 +16,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    InputMaskModule,
+    InputTextModule
   ],
   providers: [
     UserService
