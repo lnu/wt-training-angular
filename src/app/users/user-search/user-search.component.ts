@@ -13,7 +13,7 @@ import {of} from 'rxjs/observable/of';
 })
 export class UserSearchComponent implements OnInit {
 
-  private userList$: Observable<any>;
+  public userList$: Observable<any>;
   form = new FormGroup({
     searchText: new FormControl(null, [Validators.required])
   });
